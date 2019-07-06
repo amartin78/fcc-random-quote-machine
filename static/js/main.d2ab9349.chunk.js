@@ -1,2 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[0],{10:function(n,e,o){},3:function(n,e,o){n.exports=o(4)},4:function(n,e,o){"use strict";o.r(e);var t=o(0),c=o.n(t),a=o(2),r=o.n(a);o(10);r.a.render(c.a.createElement("p",null,"Random Quote Machine"),document.getElementById("root"))}},[[3,1,2]]]);
-//# sourceMappingURL=main.d2ab9349.chunk.js.map
