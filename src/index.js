@@ -36,6 +36,7 @@ class Main extends React.Component {
         .then(
             (result) => {
                 this.setState({
+                    error: null,
                     isLoaded: true,
                     text: result.quoteText,
                     author: result.quoteAuthor,
@@ -50,25 +51,31 @@ class Main extends React.Component {
         )
     }
 
-    newQuote = () => {
-        this.fetchQuote();
-    }
-
     componentDidMount() {
         this.fetchQuote();
     }
 
+    newQuote = () => {
+        this.fetchQuote();
+    }
+
     render() {
-        return (
-            <div id="quote-box">
-                <Box 
-                    text = {this.state.text}
-                    author = {this.state.author}
-                    newQuote = {this.newQuote}
-                />
-            </div>
-            
-        );
+        const { error, isLoaded } = this.state;
+        if (error) {
+            return <div>Error: {error.message}</div>
+        } else if (!isLoaded) {
+            return <div>Loading...</div>
+        } else {
+            return (
+                <div id="quote-box">
+                    <Box 
+                        text = {this.state.text}
+                        author = {this.state.author}
+                        newQuote = {this.newQuote}
+                    />
+                </div>
+            );
+        }
     }
 }
 
