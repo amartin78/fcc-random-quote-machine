@@ -2,6 +2,29 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
+class Box extends React.Component {
+
+    render() {
+        return (
+            <div>
+                <p id="text">{this.props.text}</p>
+                <p id="author">{this.props.author}</p>
+            </div>
+        );
+    }
+}
+
+class Buttons extends React.Component {
+
+    render() {
+        return (
+            <div>
+                <button id="tweet-quote">Tweet Quote</button>
+                <button id="new-quote">New Quote</button>
+            </div>
+        );
+    }
+}
 
 
 class Main extends React.Component {
@@ -39,8 +62,15 @@ class Main extends React.Component {
     render() {
         return (
             <div id="quote-box">
-                <div id="text">{this.state.text + " - " + this.state.author}</div>
+                <Box 
+                    text = {this.state.text}
+                    author = {this.state.author}
+                />
+                <Buttons
+
+                />
             </div>
+            
         );
     }
 }
