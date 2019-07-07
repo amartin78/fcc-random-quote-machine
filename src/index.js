@@ -5,27 +5,18 @@ import './index.css';
 class Box extends React.Component {
 
     render() {
+        let text = "https://twitter.com/intent/tweet?text=\"" + this.props.text.trim() + "\"  " + this.props.author.trim();
+
         return (
             <div>
                 <p id="text">{this.props.text}</p>
                 <p id="author">{this.props.author}</p>
+                <a href={text} target="_blank" id="tweet-quote"><button>Tweet Quote</button></a>
+                <button id="new-quote" onClick={this.props.newQuote}>New Quote</button>
             </div>
         );
     }
 }
-
-class Buttons extends React.Component {
-
-    render() {
-        return (
-            <div>
-                <button id="tweet-quote">Tweet Quote</button>
-                <button id="new-quote">New Quote</button>
-            </div>
-        );
-    }
-}
-
 
 class Main extends React.Component {
     constructor() {
@@ -39,7 +30,7 @@ class Main extends React.Component {
         }
     }
 
-    componentDidMount() {
+    fetchQuote = () => {
         fetch("https://cors-anywhere.herokuapp.com/api.forismatic.com/api/1.0/?method=getQuote&format=json&lang=en")
         .then(res => res.json())
         .then(
@@ -59,15 +50,21 @@ class Main extends React.Component {
         )
     }
 
+    newQuote = () => {
+        this.fetchQuote();
+    }
+
+    componentDidMount() {
+        this.fetchQuote();
+    }
+
     render() {
         return (
             <div id="quote-box">
                 <Box 
                     text = {this.state.text}
                     author = {this.state.author}
-                />
-                <Buttons
-
+                    newQuote = {this.newQuote}
                 />
             </div>
             
