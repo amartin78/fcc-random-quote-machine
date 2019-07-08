@@ -5,7 +5,7 @@ import './index.css';
 class Box extends React.Component {
 
     render() {
-        let text = "https://twitter.com/intent/tweet?text=\"" + this.props.text.trim() + "\"  " + this.props.author.trim();
+        let text = "https://twitter.com/intent/tweet?text=\"" + this.props.text.trim().replace(/;/g, ',') + "\"  " + this.props.author.trim();
 
         return (
             <div>
@@ -30,6 +30,10 @@ class Main extends React.Component {
         }
     }
 
+    componentDidMount() {
+        this.fetchQuote();
+    }
+
     fetchQuote = () => {
         fetch("https://cors-anywhere.herokuapp.com/api.forismatic.com/api/1.0/?method=getQuote&format=json&lang=en")
         .then(res => res.json())
@@ -51,9 +55,7 @@ class Main extends React.Component {
         )
     }
 
-    componentDidMount() {
-        this.fetchQuote();
-    }
+    
 
     newQuote = () => {
         this.fetchQuote();
