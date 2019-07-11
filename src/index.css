@@ -1,5 +1,6 @@
 body {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
+  background-color: lightskyblue;
 }
 
 #root {
@@ -12,12 +13,17 @@ body {
 #quote-box {
   width: 50%;
   padding: 2em;
+  margin-top: -4rem;
   text-align: center;
-  background-color: lightskyblue;
+  background-color: white;
 }
 
 #author {
   text-align: right;
+}
+
+.btn {
+  background-color: lightskyblue;
 }
 
 #new-quote {
