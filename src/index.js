@@ -9,13 +9,15 @@ import axios from 'axios';
 class Box extends React.Component {
 
     render() {
-        let text = "https://twitter.com/intent/tweet?text=\"" + this.props.text.trim().replace(/;/g, ',') + "\"  " + this.props.author.trim();
+        let text = this.props.text?this.props.text.trim().replace(/;/g, ','):'';
+        let author = this.props.author?this.props.author.trim():'';
+        let url = "https://twitter.com/intent/tweet?text=\"" + text + "\"" + author;
 
         return (
             <div>
                 <p id="text">{this.props.text}</p>
                 <p id="author">{this.props.author}</p>
-                <a href={text} target="_blank" id="tweet-quote" rel="noopener noreferrer"><Button variant="light" size="sm">Tweet Quote</Button></a>
+                <a href={url} target="_blank" id="tweet-quote" rel="noopener noreferrer"><Button variant="light" size="sm">Tweet Quote</Button></a>
                 <Button id="new-quote" onClick={this.props.newQuote} variant="light" size="sm">New Quote</Button>
             </div>
         );
@@ -35,9 +37,21 @@ class Main extends React.Component {
         this.newQuote = this.newQuote.bind(this);
     }
 
+    componentDidMount() {
+        this.fetchQuote();    
+    }
+
     fetchQuote = async () => {
         axios.get('https://cors-anywhere.herokuapp.com/api.forismatic.com/api/1.0/?method=getQuote&format=json&lang=en')
             .then(response => {
+
+
+                if (response.data.quoteText == undefined ||
+                    response.data.quoteAuthor == undefined) {
+                        this.fetchQuote();
+                    }
+
+
                 this.setState({
                     text: response.data.quoteText,
                     author: response.data.quoteAuthor,
@@ -50,10 +64,6 @@ class Main extends React.Component {
                     error: error,
                 });
             })
-    }
-    
-    componentDidMount() {
-        this.fetchQuote();    
     }
 
     newQuote = () => {
