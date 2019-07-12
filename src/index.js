@@ -49,7 +49,7 @@ class Main extends React.Component {
                 if (response.data.quoteText == undefined ||
                     response.data.quoteAuthor == undefined) {
                         this.fetchQuote();
-                    }
+                }
 
 
                 this.setState({
