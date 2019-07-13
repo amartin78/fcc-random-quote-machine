@@ -9,9 +9,9 @@ import axios from 'axios';
 class Box extends React.Component {
 
     render() {
-        let text = this.props.text?this.props.text.trim().replace(/;/g, ','):'';
-        let author = this.props.author?this.props.author.trim():'';
-        let url = "https://twitter.com/intent/tweet?text=\"" + text + "\"" + author;
+        let text = this.props.text.trim().replace(/;/g, ',');
+        let author = this.props.author.trim();
+        let url = "https://twitter.com/intent/tweet?text=\"" + text + "\"  " + author;
 
         return (
             <div>
@@ -41,22 +41,12 @@ class Main extends React.Component {
         this.fetchQuote();    
     }
 
-    fetchQuote = async () => {
-        axios.get('https://cors-anywhere.herokuapp.com/api.forismatic.com/api/1.0/?method=getQuote&format=json&lang=en')
+    fetchQuote = () => {
+        axios.get('https://gist.githubusercontent.com/camperbot/5a022b72e96c4c9585c32bf6a75f62d9/raw/e3c6895ce42069f0ee7e991229064f167fe8ccdc/quotes.json')
             .then(response => {
-
-
-                if (response.data.quoteText == undefined ||
-                    response.data.quoteAuthor == undefined) {
-                    this.setState({
-                        isLoaded: false,
-                    });
-                    this.fetchQuote();
-                }
-
                 this.setState({
-                    text: response.data.quoteText,
-                    author: response.data.quoteAuthor,
+                    text: response.data.quotes[Math.floor(Math.random() * 102)].quote,
+                    author: response.data.quotes[Math.floor(Math.random() * 102)].author,
                     isLoaded: true,
                 });
             })
