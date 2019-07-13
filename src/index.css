@@ -1,6 +1,5 @@
 body {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  background-color: lightskyblue;
   color: lightskyblue;
 }
 
@@ -24,7 +23,6 @@ body {
 }
 
 .btn, .btn:hover, btn:visited, btn:active {
-  background-color: lightskyblue;
   border-radius: unset;
   border: none;
   box-shadow: none;
