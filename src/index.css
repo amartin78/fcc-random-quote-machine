@@ -1,6 +1,7 @@
 body {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   background-color: lightskyblue;
+  color: lightskyblue;
 }
 
 #root {
@@ -13,9 +14,9 @@ body {
 #quote-box {
   width: 50%;
   padding: 2em;
-  margin-top: -4rem;
   text-align: center;
   background-color: white;
+  font-size: larger;
 }
 
 #author {
@@ -27,6 +28,7 @@ body {
   border-radius: unset;
   border: none;
   box-shadow: none;
+  color: white;
 }
 
 #new-quote {
@@ -37,8 +39,21 @@ body {
   float: left;
 }
 
+@media (max-width: 500px) {
+  #quote-box {
+    width: 90%;
+    margin-top: -1rem;
+    font-size: medium;
+  }
+}
 
-
+@media (orientation: landscape) and (max-width: 850px) {
+  #quote-box {
+    width: 70%;
+    margin-top: 0rem;
+    font-size: medium;
+  }
+}
 
 
 
